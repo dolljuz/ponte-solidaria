@@ -218,9 +218,25 @@ a { color: inherit; }
 /* ---------- Projetos ---------- */
 .filtros-projetos {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
   padding-block: 1rem;
+}
+
+.filtro-favoritos {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: end;
+  min-height: 2.75rem;
+}
+
+.filtro-favoritos input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--cor-primaria);
 }
 
 .projetos__resultado {
@@ -228,6 +244,8 @@ a { color: inherit; }
   color: var(--cor-primaria);
   font-weight: 600;
 }
+
+.projetos__mensagem { margin-block: 0; }
 
 .projetos {
   display: grid;
@@ -255,6 +273,30 @@ a { color: inherit; }
   color: var(--cor-primaria);
   margin: 0 0 0.6rem;
   font-size: 0.9rem;
+}
+
+.botao-favorito {
+  min-height: 2.75rem;
+  margin-top: 0.75rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--cor-primaria);
+  border-radius: var(--raio);
+  background: var(--cor-suporte);
+  color: var(--cor-primaria-escura);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.botao-favorito:hover,
+.botao-favorito[aria-pressed="true"] {
+  background: var(--cor-primaria);
+  color: var(--cor-suporte);
+}
+
+.botao-favorito:focus-visible {
+  outline: 2px solid var(--cor-secundaria);
+  outline-offset: 2px;
 }
 
 /* ---------- Formulário ---------- */
