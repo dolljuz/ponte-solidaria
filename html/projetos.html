@@ -32,6 +32,23 @@
       <p>Cada projeto é mantido por doações e pelo tempo de voluntários da comunidade. Conheça as frentes de trabalho abertas neste momento.</p>
     </section>
 
+    <section class="filtros-projetos container" aria-label="Buscar e filtrar projetos">
+      <div class="campo">
+        <label for="busca-projetos">Buscar projetos</label>
+        <input type="search" id="busca-projetos" name="busca" placeholder="Nome, área ou descrição">
+      </div>
+      <div class="campo">
+        <label for="area-projetos">Filtrar por área</label>
+        <select id="area-projetos" name="area">
+          <option value="">Todas as áreas</option>
+          <option value="Segurança alimentar">Segurança alimentar</option>
+          <option value="Educação">Educação</option>
+          <option value="Capacitação profissional">Capacitação profissional</option>
+          <option value="Campanha sazonal">Campanha sazonal</option>
+        </select>
+      </div>
+    </section>
+    <p class="projetos__resultado container" id="resultado-projetos" role="status" aria-live="polite"></p>
     <section class="projetos container" aria-label="Projetos ativos"></section>
 
     <section class="chamada">

@@ -35,11 +35,34 @@ function escaparHTML(valor) {
   });
 }
 
+function normalizarTexto(texto) {
+  return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR');
+}
+
 window.renderizarProjetos = function (raiz) {
   var lista = raiz.querySelector('.projetos');
   if (!lista) return;
 
-  lista.innerHTML = projetosAtivos.map(function (projeto) {
+  var busca = raiz.querySelector('#busca-projetos');
+  var filtroArea = raiz.querySelector('#area-projetos');
+  var termo = normalizarTexto(busca ? busca.value.trim() : '');
+  var areaSelecionada = filtroArea ? filtroArea.value : '';
+  var projetosFiltrados = projetosAtivos.filter(function (projeto) {
+    var textoProjeto = normalizarTexto([projeto.titulo, projeto.area, projeto.descricao].join(' '));
+    return textoProjeto.includes(termo) && (!areaSelecionada || projeto.area === areaSelecionada);
+  });
+  var resultado = raiz.querySelector('#resultado-projetos');
+
+  if (resultado) {
+    resultado.textContent = projetosFiltrados.length + (projetosFiltrados.length === 1 ? ' projeto encontrado' : ' projetos encontrados');
+  }
+
+  if (projetosFiltrados.length === 0) {
+    lista.innerHTML = '<p class="projetos__vazio">Nenhum projeto corresponde à busca.</p>';
+    return;
+  }
+
+  lista.innerHTML = projetosFiltrados.map(function (projeto) {
     return `
       <article class="cartao-projeto">
         <h2>${escaparHTML(projeto.titulo)}</h2>
@@ -48,4 +71,17 @@ window.renderizarProjetos = function (raiz) {
       </article>
     `;
   }).join('');
+};
+
+window.inicializarFiltrosProjetos = function (raiz) {
+  var busca = raiz.querySelector('#busca-projetos');
+  var filtroArea = raiz.querySelector('#area-projetos');
+  if (!busca || !filtroArea) return;
+
+  busca.addEventListener('input', function () {
+    window.renderizarProjetos(raiz);
+  });
+  filtroArea.addEventListener('change', function () {
+    window.renderizarProjetos(raiz);
+  });
 };
