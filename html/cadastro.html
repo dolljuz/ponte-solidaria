@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ponte Solidária — Cadastro de voluntário</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="cabecalho">
+    <div class="container cabecalho__conteudo">
+      <a href="../html/index.html" class="marca">Ponte <span>Solidária</span></a>
+      <nav class="navegacao" aria-label="Navegação principal">
+        <button class="navegacao__botao" id="botaoMenu" aria-expanded="false" aria-controls="listaNav" aria-label="Abrir menu">
+          <span></span>
+        </button>
+        <ul class="navegacao__lista" id="listaNav">
+          <li><a href="../html/index.html">Início</a></li>
+          <li><a href="../html/projetos.html">Projetos</a></li>
+          <li><a href="../html/cadastro.html" aria-current="page">Seja voluntário</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="pagina-topo container">
+      <h1>Cadastro de voluntário</h1>
+      <p>Preencha os campos abaixo. Os dados são usados apenas para organizar as escalas de voluntariado e nunca são compartilhados com terceiros.</p>
+    </section>
+
+    <section class="container secao-formulario">
+      <form id="formCadastro" class="formulario" novalidate>
+
+        <fieldset>
+          <legend>Dados pessoais</legend>
+
+          <div class="campo">
+            <label for="nome">Nome completo</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              required
+              minlength="3"
+              autocomplete="name"
+              aria-describedby="erro-nome">
+            <span class="mensagem-erro" id="erro-nome" role="alert"></span>
+          </div>
+
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              autocomplete="email"
+              aria-describedby="erro-email">
+            <span class="mensagem-erro" id="erro-email" role="alert"></span>
+          </div>
+
+          <div class="campo-grupo">
+            <div class="campo">
+              <label for="cpf">CPF</label>
+              <input
+                type="text"
+                id="cpf"
+                name="cpf"
+                inputmode="numeric"
+                placeholder="000.000.000-00"
+                maxlength="14"
+                required
+                pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                aria-describedby="erro-cpf">
+              <span class="mensagem-erro" id="erro-cpf" role="alert"></span>
+            </div>
+
+            <div class="campo">
+              <label for="telefone">Telefone</label>
+              <input
+                type="tel"
+                id="telefone"
+                name="telefone"
+                inputmode="numeric"
+                placeholder="(00) 00000-0000"
+                maxlength="15"
+                required
+                pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
+                aria-describedby="erro-telefone">
+              <span class="mensagem-erro" id="erro-telefone" role="alert"></span>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Endereço</legend>
+
+          <div class="campo-grupo">
+            <div class="campo">
+              <label for="cep">CEP</label>
+              <input
+                type="text"
+                id="cep"
+                name="cep"
+                inputmode="numeric"
+                placeholder="00000-000"
+                maxlength="9"
+                required
+                pattern="\d{5}-\d{3}"
+                aria-describedby="erro-cep">
+              <span class="mensagem-erro" id="erro-cep" role="alert"></span>
+            </div>
+
+            <div class="campo">
+              <label for="bairro">Bairro</label>
+              <input
+                type="text"
+                id="bairro"
+                name="bairro"
+                required
+                minlength="2"
+                autocomplete="address-level3"
+                aria-describedby="erro-bairro">
+              <span class="mensagem-erro" id="erro-bairro" role="alert"></span>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Atuação voluntária</legend>
+
+          <div class="campo">
+            <label for="area">Área de interesse</label>
+            <select id="area" name="area" required aria-describedby="erro-area">
+              <option value="" selected disabled>Selecione uma área</option>
+              <option value="alimentacao">Mesa Cheia — Segurança alimentar</option>
+              <option value="educacao">Reforço que Transforma — Educação</option>
+              <option value="capacitacao">Primeiro Passo — Capacitação profissional</option>
+              <option value="campanha">Agasalho em Rede — Campanha sazonal</option>
+            </select>
+            <span class="mensagem-erro" id="erro-area" role="alert"></span>
+          </div>
+
+          <div class="campo">
+            <label for="mensagem">Conte um pouco sobre sua disponibilidade (opcional)</label>
+            <textarea id="mensagem" name="mensagem" rows="4" maxlength="400"></textarea>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="botao botao--destaque">Enviar cadastro</button>
+
+        <p class="confirmacao" id="mensagemConfirmacao" role="status" hidden>
+          Cadastro enviado! Em breve nossa equipe entra em contato.
+        </p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container rodape__conteudo">
+      <p>Ponte Solidária — projeto acadêmico fictício</p>
+      <p>contato@pontesolidaria.org.br · (44) 0000-0000</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/projetos.js"></script>
+  <script src="../js/preferencias.js"></script>
+  <script src="../js/mascaras.js"></script>
+  <script src="../js/validacao.js"></script>
+</body>
+</html>
