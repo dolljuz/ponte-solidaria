@@ -47,9 +47,14 @@
           <option value="Campanha sazonal">Campanha sazonal</option>
         </select>
       </div>
+      <label class="filtro-favoritos" for="somente-favoritos">
+        <input type="checkbox" id="somente-favoritos" aria-controls="lista-projetos">
+        Somente favoritos
+      </label>
     </section>
     <p class="projetos__resultado container" id="resultado-projetos" role="status" aria-live="polite"></p>
-    <section class="projetos container" aria-label="Projetos ativos"></section>
+    <p class="projetos__mensagem container" id="mensagem-favoritos" role="status" aria-live="polite"></p>
+    <section class="projetos container" id="lista-projetos" aria-label="Projetos ativos"></section>
 
     <section class="chamada">
       <div class="container chamada__conteudo">
