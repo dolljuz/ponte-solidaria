@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function inicializarInteracoes() {
     if (window.renderizarProjetos) window.renderizarProjetos(principal);
+    if (window.inicializarFiltrosProjetos) window.inicializarFiltrosProjetos(principal);
     if (window.inicializarPreferencias) window.inicializarPreferencias(principal);
     if (window.inicializarMascaras) window.inicializarMascaras(principal);
     if (window.inicializarValidacao) window.inicializarValidacao(principal);
