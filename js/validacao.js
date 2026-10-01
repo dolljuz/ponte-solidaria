@@ -20,12 +20,14 @@ window.inicializarValidacao = function (raiz) {
     campo.setCustomValidity('');
 
     if (campo.validity.valid) {
+      campo.removeAttribute('aria-invalid');
       if (mensagemErro) mensagemErro.textContent = '';
       return true;
     }
 
     var texto = mensagensPersonalizadas[campo.id] || 'Verifique este campo.';
     campo.setCustomValidity(texto);
+    campo.setAttribute('aria-invalid', 'true');
     if (mensagemErro) mensagemErro.textContent = texto;
     return false;
   }
@@ -49,9 +51,13 @@ window.inicializarValidacao = function (raiz) {
     evento.preventDefault();
 
     var todosValidos = true;
+    var primeiroInvalido = null;
     camposObrigatorios.forEach(function (campo) {
       var valido = validarCampo(campo);
-      if (!valido) todosValidos = false;
+      if (!valido) {
+        todosValidos = false;
+        if (!primeiroInvalido) primeiroInvalido = campo;
+      }
     });
 
     var mensagemConfirmacao = raiz.querySelector('#mensagemConfirmacao');
@@ -62,13 +68,12 @@ window.inicializarValidacao = function (raiz) {
       if (window.restaurarPreferenciaArea) window.restaurarPreferenciaArea(raiz);
       camposObrigatorios.forEach(function (campo) {
         campo.dataset.tocado = 'false';
+        campo.removeAttribute('aria-invalid');
         var erro = raiz.querySelector('#erro-' + campo.id);
         if (erro) erro.textContent = '';
       });
     } else {
       mensagemConfirmacao.hidden = true;
-      // leva o foco ao primeiro campo inválido
-      var primeiroInvalido = formulario.querySelector(':invalid');
       if (primeiroInvalido) primeiroInvalido.focus();
     }
   });

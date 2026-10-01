@@ -4,14 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ponte Solidária</title>
+  <script>
+    try {
+      var temaSalvo = localStorage.getItem('ponteSolidaria.tema');
+      var temaInicial = temaSalvo === 'escuro' || temaSalvo === 'claro'
+        ? temaSalvo
+        : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'escuro'
+          : 'claro';
+      document.documentElement.setAttribute('data-tema', temaInicial);
+    } catch (erro) {
+      document.documentElement.setAttribute('data-tema', 'claro');
+    }
+  </script>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <a class="atalho-conteudo" href="#conteudo-principal">Ir para o conteúdo</a>
   <header class="cabecalho">
     <div class="container cabecalho__conteudo">
       <a href="../html/index.html" class="marca">Ponte <span>Solidária</span></a>
+      <button class="tema__botao" id="botaoTema" type="button" aria-pressed="false">Modo escuro</button>
       <nav class="navegacao" aria-label="Navegação principal">
         <button class="navegacao__botao" id="botaoMenu" aria-expanded="false" aria-controls="listaNav" aria-label="Abrir menu">
           <span></span>
@@ -25,7 +40,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="conteudo-principal" tabindex="-1">
     <section class="hero">
       <div class="container hero__conteudo">
         <h1>Juntos, a comunidade cresce.</h1>
@@ -61,7 +76,7 @@
       </ul>
     </section>
 
-    <section class="numeros">
+    <section class="numeros" aria-label="Nosso impacto comunitário">
       <div class="container numeros__grade">
         <div class="numero">
           <strong>340</strong>
@@ -94,10 +109,6 @@
     </div>
   </footer>
 
-  <script src="../js/main.js"></script>
-  <script src="../js/projetos.js"></script>
-  <script src="../js/preferencias.js"></script>
-  <script src="../js/mascaras.js"></script>
-  <script src="../js/validacao.js"></script>
+  <script type="module" src="../js/app.js"></script>
 </body>
 </html>

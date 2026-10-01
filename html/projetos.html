@@ -4,15 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ponte Solidária — Projetos</title>
+  <script>
+    try {
+      var temaSalvo = localStorage.getItem('ponteSolidaria.tema');
+      var temaInicial = temaSalvo === 'escuro' || temaSalvo === 'claro'
+        ? temaSalvo
+        : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'escuro'
+          : 'claro';
+      document.documentElement.setAttribute('data-tema', temaInicial);
+    } catch (erro) {
+      document.documentElement.setAttribute('data-tema', 'claro');
+    }
+  </script>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
+  <a class="atalho-conteudo" href="#conteudo-principal">Ir para o conteúdo</a>
   <header class="cabecalho">
     <div class="container cabecalho__conteudo">
       <a href="../html/index.html" class="marca">Ponte <span>Solidária</span></a>
+      <button class="tema__botao" id="botaoTema" type="button" aria-pressed="false">Modo escuro</button>
       <nav class="navegacao" aria-label="Navegação principal">
         <button class="navegacao__botao" id="botaoMenu" aria-expanded="false" aria-controls="listaNav" aria-label="Abrir menu">
           <span></span>
@@ -26,7 +41,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="conteudo-principal" tabindex="-1">
     <section class="pagina-topo container">
       <h1>Iniciativas em andamento</h1>
       <p>Cada projeto é mantido por doações e pelo tempo de voluntários da comunidade. Conheça as frentes de trabalho abertas neste momento.</p>
@@ -72,10 +87,6 @@
     </div>
   </footer>
 
-  <script src="../js/main.js"></script>
-  <script src="../js/projetos.js"></script>
-  <script src="../js/preferencias.js"></script>
-  <script src="../js/mascaras.js"></script>
-  <script src="../js/validacao.js"></script>
+  <script type="module" src="../js/app.js"></script>
 </body>
 </html>

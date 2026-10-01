@@ -1,13 +1,23 @@
 /* ---------- Tokens ---------- */
 :root {
+  color-scheme: light;
   --cor-fundo: #F7F3EA;
   --cor-texto: #211D1A;
   --cor-primaria: #1F4B43;
   --cor-primaria-escura: #143530;
   --cor-secundaria: #D9A441;
+  --cor-secundaria-texto: #765000;
   --cor-suporte: #FFFFFF;
   --cor-erro: #B3402A;
-  --cor-borda: #DCD3C0;
+  --cor-borda: #8A8173;
+  --cor-foco: var(--cor-primaria-escura);
+  --cor-texto-secundario: #55524C;
+  --cor-placeholder: #625B50;
+  --cor-texto-inverso: #FFFFFF;
+  --cor-texto-inverso-suave: #DCE7E4;
+  --cor-superficie-escura: #143530;
+  --cor-sucesso-fundo: #E4EFE9;
+  --cor-sucesso-texto: #143530;
 
   --fonte-titulo: 'Fraunces', serif;
   --fonte-corpo: 'Work Sans', sans-serif;
@@ -39,7 +49,47 @@ h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); }
 
 p { max-width: 65ch; }
 
+:root[data-tema="escuro"] {
+  color-scheme: dark;
+  --cor-fundo: #171B19;
+  --cor-texto: #F2F1EC;
+  --cor-primaria: #A9D7C4;
+  --cor-secundaria-texto: #F1C96A;
+  --cor-suporte: #232A26;
+  --cor-erro: #FF9B8B;
+  --cor-borda: #85928A;
+  --cor-foco: #F1C96A;
+  --cor-texto-secundario: #C7D1CB;
+  --cor-placeholder: #B5C1B9;
+  --cor-texto-inverso: #F2F1EC;
+  --cor-texto-inverso-suave: #DCE7E4;
+  --cor-superficie-escura: #143530;
+  --cor-sucesso-fundo: #25483C;
+  --cor-sucesso-texto: #E6F2EB;
+}
+
 a { color: inherit; }
+
+.atalho-conteudo {
+  position: absolute;
+  inset-block-start: 0.75rem;
+  inset-inline-start: 0.75rem;
+  z-index: 1000;
+  padding: 0.7rem 1rem;
+  transform: translateY(-200%);
+  background: var(--cor-suporte);
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-foco);
+  border-radius: var(--raio);
+}
+
+.atalho-conteudo:focus { transform: translateY(0); }
+
+:focus-visible {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--cor-suporte);
+}
 
 .container {
   max-width: var(--largura-maxima);
@@ -69,10 +119,10 @@ a { color: inherit; }
   font-weight: 700;
   font-size: 1.3rem;
   text-decoration: none;
-  color: var(--cor-primaria-escura);
+  color: var(--cor-texto);
 }
 
-.marca span { color: var(--cor-secundaria); }
+.marca span { color: var(--cor-secundaria-texto); }
 
 .navegacao__botao {
   display: none;
@@ -95,7 +145,7 @@ a { color: inherit; }
   left: 0.5rem;
   right: 0.5rem;
   height: 2px;
-  background: var(--cor-primaria-escura);
+  background: var(--cor-primaria);
   border-radius: 999px;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
@@ -134,19 +184,31 @@ a { color: inherit; }
 
 .navegacao__lista a[aria-current="page"],
 .navegacao__lista a:hover {
-  border-color: var(--cor-secundaria);
+  border-color: var(--cor-secundaria-texto);
+}
+
+.tema__botao {
+  min-height: 2.8rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-suporte);
+  color: var(--cor-texto);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 /* ---------- Hero ---------- */
 .hero {
-  background: var(--cor-primaria);
-  color: var(--cor-suporte);
+  background: var(--cor-superficie-escura);
+  color: var(--cor-texto-inverso);
   padding-block: 4.5rem;
 }
 
 .hero__conteudo { max-width: 42rem; }
 
-.hero p { color: #E7EEEC; }
+.hero p { color: var(--cor-texto-inverso-suave); }
 
 .chamada__conteudo {
   max-width: 48rem;
@@ -174,8 +236,8 @@ a { color: inherit; }
 .botao--destaque:hover { background: #C6922F; }
 
 .botao--contorno {
-  border-color: var(--cor-suporte);
-  color: var(--cor-suporte);
+  border-color: var(--cor-texto-inverso);
+  color: var(--cor-texto-inverso);
 }
 
 .botao--contorno:hover { background: rgba(255,255,255,0.12); }
@@ -197,20 +259,20 @@ a { color: inherit; }
   color: var(--cor-primaria);
 }
 
-.numero span { color: #55524C; }
+.numero span { color: var(--cor-texto-secundario); }
 
 /* ---------- Missão ---------- */
 .missao { padding-block: 3.5rem; }
 
 /* ---------- Chamada ---------- */
 .chamada {
-  background: var(--cor-primaria-escura);
-  color: var(--cor-suporte);
+  background: var(--cor-superficie-escura);
+  color: var(--cor-texto-inverso);
   padding-block: 3.5rem;
   text-align: center;
 }
 
-.chamada p { margin: 0 auto; color: #DCE7E4; }
+.chamada p { margin: 0 auto; color: var(--cor-texto-inverso-suave); }
 
 /* ---------- Página de topo (projetos/cadastro) ---------- */
 .pagina-topo { padding-block: 3rem 1.5rem; }
@@ -282,7 +344,7 @@ a { color: inherit; }
   border: 1px solid var(--cor-primaria);
   border-radius: var(--raio);
   background: var(--cor-suporte);
-  color: var(--cor-primaria-escura);
+  color: var(--cor-texto);
   font: inherit;
   font-weight: 600;
   cursor: pointer;
@@ -290,13 +352,8 @@ a { color: inherit; }
 
 .botao-favorito:hover,
 .botao-favorito[aria-pressed="true"] {
-  background: var(--cor-primaria);
-  color: var(--cor-suporte);
-}
-
-.botao-favorito:focus-visible {
-  outline: 2px solid var(--cor-secundaria);
-  outline-offset: 2px;
+  background: var(--cor-superficie-escura);
+  color: var(--cor-texto-inverso);
 }
 
 /* ---------- Formulário ---------- */
@@ -347,8 +404,13 @@ input, select, textarea {
   color: var(--cor-texto);
 }
 
-input:focus, select:focus, textarea:focus {
-  outline: 2px solid var(--cor-primaria);
+input::placeholder, textarea::placeholder {
+  color: var(--cor-placeholder);
+  opacity: 1;
+}
+
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--cor-foco);
   outline-offset: 1px;
 }
 
@@ -364,16 +426,16 @@ select:invalid[data-tocado="true"] {
 }
 
 .confirmacao {
-  background: #E4EFE9;
-  color: var(--cor-primaria-escura);
+  background: var(--cor-sucesso-fundo);
+  color: var(--cor-sucesso-texto);
   padding: 0.8rem 1rem;
   border-radius: var(--raio);
 }
 
 /* ---------- Rodapé ---------- */
 .rodape {
-  background: var(--cor-primaria-escura);
-  color: #C9D6D2;
+  background: var(--cor-superficie-escura);
+  color: var(--cor-texto-inverso-suave);
   padding-block: 1.6rem;
   font-size: 0.9rem;
 }
@@ -470,4 +532,13 @@ select:invalid[data-tocado="true"] {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

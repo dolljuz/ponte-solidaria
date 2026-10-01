@@ -5,10 +5,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (!principal) return;
 
+  function definirMenu(aberto) {
+    if (!botaoMenu || !listaNav) return;
+    listaNav.classList.toggle('aberto', aberto);
+    botaoMenu.setAttribute('aria-expanded', String(aberto));
+    botaoMenu.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+  }
+
   if (botaoMenu && listaNav) {
     botaoMenu.addEventListener('click', function () {
-      var aberto = listaNav.classList.toggle('aberto');
-      botaoMenu.setAttribute('aria-expanded', aberto);
+      definirMenu(botaoMenu.getAttribute('aria-expanded') !== 'true');
+    });
+
+    document.addEventListener('keydown', function (evento) {
+      if (evento.key === 'Escape' && botaoMenu.getAttribute('aria-expanded') === 'true') {
+        definirMenu(false);
+        botaoMenu.focus();
+      }
     });
   }
 
@@ -44,14 +57,12 @@ document.addEventListener('DOMContentLoaded', function () {
       document.title = documento.title;
       if (atualizarHistorico) history.pushState({}, '', url.href);
 
-      if (botaoMenu && listaNav) {
-        botaoMenu.setAttribute('aria-expanded', 'false');
-        listaNav.classList.remove('aberto');
-      }
+      definirMenu(false);
 
       atualizarLinkAtivo();
       inicializarInteracoes();
       window.scrollTo(0, 0);
+      principal.focus();
     } catch (erro) {
       window.location.assign(url.href);
     }
